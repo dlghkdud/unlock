@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{%block content %}
+
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+    }
+    .start_area {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: black; 
+        flex-direction: column;
+        width: 130vh; /* 원하는 가로 크기 */
+        height: 73vh; /* 원하는 세로 크기 */
+        position: fixed;
+        top: 53%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 20px;
+    }
+    .start{
+        text-decoration: none;
+        color: black;
+        display: block;
+        background-color: white;
+        border: none;
+        width: 700px;
+        height: 90px;
+        border-radius: 30px;
+        font-size: 70px;
+        margin-top: 40%;
+        margin-bottom: 15px;
+        font-family: 'Pretendard-Regular';
+        text-align: center;
+        padding-top: 5px;
+    }
+    .sign{
+        display: block;
+        font-family: 'Pretendard-Regular';
+        color:white;
+        font-size: 25px;
+        text-decoration: none;
+    }
+</style>
+
+
+<div class="start_area">
+    <a class="start" href="{% url 'unlockk:signin' %}">START</button>
+    <a class="sign" href="{% url 'unlockk:signup' %}">If you don't have an account, please sign up</p>
+</div>
+{% endblock %}
+

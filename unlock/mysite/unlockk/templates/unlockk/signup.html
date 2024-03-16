@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{%block content %}
+
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+    }
+    .area {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        border: solid 5px black; 
+        flex-direction: column;
+        width: 130vh; /* 원하는 가로 크기 */
+        height: 73vh; /* 원하는 세로 크기 */
+        position: fixed;
+        top: 53%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 20px;
+        flex-direction: row;
+    }
+    .temp{
+        display: block;
+        height: 73vh;
+        border-radius: 10px 0px 0px 10px;
+    }
+    .title{
+        font-family: 'Pretendard-Regular';
+        font-size: 70px;
+        margin-bottom: 40px;
+    }
+    .email{
+        border: solid black 5px;
+        font-family: 'Pretendard-Regular';
+        border-radius: 20px;
+        width: 78%;
+        height: 60px;
+        margin-bottom: 20px;
+        padding-left: 14%;
+        background-image: url("../../static/image/mail.png");
+        background-repeat: no-repeat;
+        font-size: 30px;
+        background-position: 13px center;
+        background-size: 10%;
+    }
+    .password{
+        border: solid black 5px;
+        font-family: 'Pretendard-Regular';
+        border-radius: 20px;
+        width: 78%;
+        height: 60px;
+        margin-bottom: 30px;
+        padding-left: 14%;
+        background-image: url("../../static/image/password.png");
+        background-repeat: no-repeat;
+        font-size: 30px;
+        background-position: 13px center;
+        background-size: 10%;
+    }
+    .signup-btn{
+        display: block;
+        background-color: white;
+        border: solid 5px black; 
+        width: 93%;
+        height: 75px;
+        border-radius: 30px;
+        font-size: 45px;
+        margin-bottom: 20px;
+        font-family: 'Pretendard-Regular';
+        
+    }
+    .sign{
+        display: block;
+        font-family: 'Pretendard-Regular';
+        color:black;
+        font-size: 28px;
+        text-decoration: none;
+    }
+    .inbox{
+        display: block;
+        width: 1600px;
+        margin-left: 3.5%;
+    }
+</style>
+
+
+<div class="area">
+    <img class="temp" src="/static/image/temp.png">
+    <form method="post" action="{% url 'unlockk:signup' %}" class="inbox">
+
+        <div class="title">Sign up</div>
+
+        <div class="id">
+            <input type="text" class="email" placeholder="email">
+        </div>
+        <div class="pw">
+            <input type="password" class="password"placeholder="password">
+        </div>
+        
+
+        <button type="submit" class="signup-btn">Next Stage</button>
+        <a class="sign" href="{% url 'unlockk:signin' %}">If you don't have an account, please sign up</p>
+    </form>
+    
+</div>
+
+{% endblock %}
