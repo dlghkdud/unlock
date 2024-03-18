@@ -6,7 +6,7 @@ app_name = 'unlockk'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('signin/', views.signin, name='signin'),
+    path('signin/', auth_views.LoginView.as_view(template_name='unlockk/signin.html'), name='signin'),
     path('signup/', views.signup, name='signup'),
 
 ]

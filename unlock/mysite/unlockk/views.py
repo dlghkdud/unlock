@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from .models import Write
 
 import os
 from django.conf import settings
