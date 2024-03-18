@@ -5,6 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="../static/image/weblog.png">
     <title>너의 마음을 언록!☆</title>
 
     <style>
@@ -20,14 +21,28 @@
         width: 100%;
         height: 8vh;
     }
-
+    .logo{
+        margin-left: 0.5%;
+    }
+    .black{
+        margin-left: 85%;
+        margin-right: 0.5%;
+    }
+    .pink{
+        margin-right: 0.5%;
+    }
     </style>
 </head>
 
 <body>
-    <header class="header">
+    <a class="header" href="{% url 'unlockk:index' %}">
+        <img class="logo" src="/static/image/log.png">
 
-    </header>
+        <img class="black" src="/static/image/black.png">
+        <img class="pink" src="/static/image/pink.png">
+        <img class="yellow" src="/static/image/yellow.png">
+        
+    </a>
 
 <!-- 기본 템플릿 안에 삽입될 내용 Start -->    
 {% block content %}
