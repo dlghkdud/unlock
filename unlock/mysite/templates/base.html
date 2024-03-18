@@ -9,6 +9,24 @@
     <title>너의 마음을 언록!☆</title>
 
     <style>
+    
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+    :root,
+    :root.black{
+        --header-color: black;
+        --start-color : black;
+    }
+    :root.pink{
+        --header-color: #FFA0AB;
+        /* --start-color: #FFA0AB; */
+    }
+    :root.yellow{
+        --header-color: #FFCB7C;
+        /* --start-color: #FFCB7C; */
+    }
+
+
     @font-face {
         font-family: 'Pretendard-Regular';
         src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
@@ -17,37 +35,94 @@
     }
     .header{
         display: flex;
-        background-color: black;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: var(--header-color);
         width: 100%;
         height: 8vh;
     }
+    .right{
+        display: flex;
+        margin-right: 0.5%;
+    }
     .logo{
+        display: flex;
         margin-left: 0.5%;
     }
+    
     .black{
-        margin-left: 85%;
-        margin-right: 0.5%;
+        display: block;
     }
     .pink{
-        margin-right: 0.5%;
+        display: block;
+
     }
+    .yellow{
+        display: block;
+    }
+    .group{
+        display: block;
+        width: 50px;
+        height: 50px;
+        margin-top: 4.5%;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+    .logout{
+        display: block;
+        font-family: 'Pretendard-Regular';
+        font-weight: bold;
+        color: var(--header-color);
+        text-decoration: none;
+        font-size: 30px;
+        width: 100px;
+        height: 45px;
+        border-radius: 10%;
+        border : solid 2px black;
+        margin-top: 2.5%;
+        -webkit-text-stroke: 0.5px black;
+        padding-top: 3.5%;
+        text-align: center;
+        background-color: white;
+        margin-left: 0.8%;
+    }
+    
     </style>
 </head>
 
 <body>
-    <a class="header" href="{% url 'unlockk:index' %}">
-        <img class="logo" src="/static/image/log.png">
+    <header class="header">
+        {% if user.is_authenticated %}
+        <a  href="{% url 'unlockk:home' %}" class="logo"><img src="/static/image/log.png"></a>
+        {% else %}
+        <a  href="{% url 'unlockk:index' %}" class="logo"><img src="/static/image/log.png"></a>
+        {% endif %}
 
-        <img class="black" src="/static/image/black.png">
-        <img class="pink" src="/static/image/pink.png">
-        <img class="yellow" src="/static/image/yellow.png">
+        <span class="right">
+            <img class="black" onclick="setTheme('black')" src="/static/image/black.png">
+            <img class="pink" onclick="setTheme('pink')" src="/static/image/pink.png">
+            <img class="yellow" onclick="setTheme('yellow')" src="/static/image/yellow.png">
+
+            {% if user.is_authenticated %}
+            <img class="group" src="/static/image/group.png">
+            <a class="logout" href="{% url 'common:logout' %}">logout</a>
+            {% endif %}
+        </span>
         
-    </a>
+        
+        
+    </header>
+
+    <script>
+        const setTheme = theme => document.documentElement.className = theme;
+    </script>
 
 <!-- 기본 템플릿 안에 삽입될 내용 Start -->    
 {% block content %}
 {% endblock %}
 <!-- 기본 템플릿 안에 삽입될 내용 End -->
+
+
 
 </body>
 </html>

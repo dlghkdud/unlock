@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{%block content %}
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+    }
+    .area {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 150vh; /* 원하는 가로 크기 */
+        height: 65vh; /* 원하는 세로 크기 */
+        position: fixed;
+        top: 48%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 20px;
+        flex-direction: row;
+        align-items: flex-start;
+        margin-left: 3%;
+    }
+    .img{
+        display: block;
+        background-color: black;
+        width: 65vh;
+        height: 65vh;
+        border-radius: 20px;
+    }
+    .option{
+        display: block;
+        background-color: white;
+        border: solid 5px black; 
+        width: 65vh;
+        height: 65vh;
+        border-radius: 20px;
+    }
+    .color{
+        display: flex;
+        flex-direction: column;
+        margin-left: -5px;
+    }
+    .color1{
+        display: block;
+        width: 10vh;
+        height: 10vh;
+        border: solid 5px black; 
+        border-radius: 15px;
+    }
+    .color2{
+        display: block;
+        width: 10vh;
+        height: 10vh;
+        border: solid 5px black; 
+        border-radius: 15px;
+    }
+    .color3{
+        display: block;
+        width: 10vh;
+        height: 10vh;
+        border: solid 5px black; 
+        border-radius: 15px;
+    }
+    .color4{
+        display: block;
+        width: 10vh;
+        height: 10vh;
+        border: solid 5px black; 
+        border-radius: 15px;
+    }
+    .save{
+        display: block;
+        color: black;
+        border: solid 4px black; 
+        border-radius: 15px;
+        font-size: 50px;
+        font-family: 'Pretendard-Regular';
+        background-color: white;
+        margin-top: 41%;
+        margin-left: 85%;
+        width: 190px;
+    }
+    .savetext{
+        text-decoration: none;
+    }
+</style>
+
+<div class="area">
+    <div class="img">
+        <!-- 픽크루 이미지 -->
+    </div>
+    <div class="option">
+        <!-- 옵션창 -->
+    </div>
+
+    <div class="color">
+        <!-- 컬러 -->
+        <div class="color1">
+
+        </div>
+        <div class="color2">
+
+        </div>
+        <div class="color3">
+
+        </div>
+        <div class="color4">
+
+        </div>
+    </div>
+    
+</div>
+
+<a class="savetext" href="/unlockk/">
+    <button class="save">
+        save
+    </button>
+</a>
+
+
+{% endblock %}

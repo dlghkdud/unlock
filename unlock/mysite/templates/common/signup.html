@@ -31,7 +31,22 @@
     .title{
         font-family: 'Pretendard-Regular';
         font-size: 70px;
-        margin-bottom: 40px;
+        margin-bottom: 25px;
+        margin-top: 20px;
+    }
+    .id1{
+        border: solid black 5px;
+        font-family: 'Pretendard-Regular';
+        border-radius: 20px;
+        width: 78%;
+        height: 60px;
+        margin-bottom: 20px;
+        padding-left: 14%;
+        background-image: url("../../static/image/user.png");
+        background-repeat: no-repeat;
+        font-size: 30px;
+        background-position: 13px center;
+        background-size: 10%;
     }
     .email{
         border: solid black 5px;
@@ -90,20 +105,32 @@
 
 <div class="area">
     <img class="temp" src="/static/image/temp.png">
-    <form method="post" action="{% url 'unlockk:signup' %}" class="inbox">
-
+    <form method="post" action="{% url 'common:signup' %}" class="inbox">
+        {% csrf_token %}
+        {% include "form_errors.html" %}
         <div class="title">Sign up</div>
 
-        <div class="id">
-            <input type="text" class="email" placeholder="email">
-        </div>
-        <div class="pw">
-            <input type="password" class="password"placeholder="password">
-        </div>
+        <label for="username" class="id">
+            <input type="text" class="id1" name="username" id="username"
+            value="{{ form.username.value|default_if_none:'' }}" placeholder="id">
+        </label>
+        <label for="email" class="id">
+            <input type="text" class="email" name="email" id="email"
+            value="{{ form.email.value|default_if_none:'' }}" placeholder="email">
+        </label>
+        <label for="password1" class="pw">
+            <input type="password" class="password" name="password1" id="password1"
+            value="{{ form.password1.value|default_if_none:'' }}" placeholder="password">
+        </label>
+        <label for="password2" class="pw">
+            <input type="password" class="password" name="password2" id="password2"
+            value="{{ form.password2.value|default_if_none:'' }}" placeholder="check password">
+        </label>
+        
         
 
         <button type="submit" class="signup-btn">Next Stage</button>
-        <a class="sign" href="{% url 'unlockk:signin' %}">If you don't have an account, please sign up</p>
+        <a class="sign" href="{% url 'common:login' %}">If you don't have an account, please sign up</p>
     </form>
     
 </div>

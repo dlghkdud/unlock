@@ -11,7 +11,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: black; 
+        background-color: var(--start-color);
         flex-direction: column;
         width: 130vh; /* 원하는 가로 크기 */
         height: 73vh; /* 원하는 세로 크기 */
@@ -63,8 +63,8 @@
     <img class="startlog" src="/static/image/startlog.png">
     <img class="call" src="/static/image/call.png">
     
-    <a class="start" href="{% url 'unlockk:signin' %}">START</button>
-    <a class="sign" href="{% url 'unlockk:signup' %}">If you don't have an account, please sign up</p>
+    <a class="start" href="{% url 'common:login' %}">START</button>
+    <a class="sign" href="{% url 'common:signup' %}">If you don't have an account, please sign up</p>
 </div>
 {% endblock %}
 
