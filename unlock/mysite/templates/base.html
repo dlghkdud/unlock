@@ -106,7 +106,7 @@
             <img class="yellow" onclick="setTheme('yellow')" src="/static/image/yellow.png">
 
             {% if user.is_authenticated %}
-            <img class="group" src="/static/image/group.png">
+            <a href="{% url 'unlockk:follow' %}"><img class="group" src="/static/image/group.png"></a>
             <a class="logout" href="{% url 'common:logout' %}">logout</a>
             {% endif %}
         </span>
