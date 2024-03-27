@@ -20,14 +20,14 @@
         left: 50%;
         transform: translate(-50%, -50%);
         border-radius: 20px;
-        /* opacity: 50%; */
+        border : var(--start-border);
     }
     .start{
         text-decoration: none;
         color: black;
         display: block;
         background-color: white;
-        border: none;
+        border: 3px solid black;
         width: 700px;
         height: 90px;
         border-radius: 30px;
@@ -63,18 +63,20 @@
     }
     .blue{
         display: block;
-        width: 500px;
-        height: 500px;
+        width: 39%;
+        height: 39%;
+        transform: rotate(6.2rad)
     }
     .green{
         display: block;
-        width: 500px;
-        height: 500px;
+        width: 28%;
+        height: 28%;
     }
     .red{
         display: block;
-        width: 500px;
-        height: 500px;
+        width: 38%;
+        height: 38%;
+        transform: rotate(2deg);
     }
 </style>
 
@@ -86,7 +88,7 @@
 
 <div class="start_area">
     <img class="startlog" src="/static/image/startlog.png">
-    <img class="call" src="/static/image/call.png">
+    <img class="call" src="/static/image/call_black.png">
     
     <a class="start" href="{% url 'common:login' %}">START</button>
     <a class="sign" href="{% url 'common:signup' %}">If you don't have an account, please sign up</p>
