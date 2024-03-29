@@ -23,11 +23,14 @@
         margin-left: 3%;
     }
     .img{
-        display: block;
-        background-color: black;
+        display: flex;
+        background-image: url("../../static/image/picrew/etc/background.png");
+        background-repeat: no-repeat;
         width: 65vh;
         height: 65vh;
         border-radius: 20px;
+        background-size: 100%;
+        border: solid 5px black; 
     }
     .option{
         display: block;
@@ -85,14 +88,35 @@
     .savetext{
         text-decoration: none;
     }
+    .picrew{
+        display: block;
+        width: 100vh;
+        height: 100vh;
+        margin-top: -17vh;
+        margin-left: -11vh;
+    }
+    .opcrew {
+    width: 55vh;
+    height: 55vh;
+    margin-top: -17vh;
+    margin-left: -11vh;
+}
+    .optionsize{
+    width: 15vh;
+    height: 15vh;
+}
+
 </style>
 
 <div class="area">
     <div class="img">
-        <!-- 픽크루 이미지 -->
+        <img class="picrew" src="/static/image/picrew/etc/head.png">
     </div>
     <div class="option">
-        <!-- 옵션창 -->
+        <div class="optionsize">
+            <img class="opcrew" src="/static/image/picrew/hair/amuhair.png">
+        </div>
+        <img class="opcrew" src="/static/image/picrew/hair/hearthair.png">
     </div>
 
     <div class="color">
