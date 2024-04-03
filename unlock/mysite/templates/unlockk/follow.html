@@ -14,15 +14,71 @@
         <button class="search-button" type="button" id="btn_search">찾기</button>
     </div>
 
-    <div class="userlist">
+    {% comment %} <div class="userlist">
         <div class="user">
             {% for user in users %}
             <div>
                 {{ user.username }}
-                {% comment %} <a href = "{% url 'unlockk:following' to_user_id=to_user.id %}" data-url = :"{% url 'unlockk:following' to_user_id=to_user.id %}">팔로우</a> {% endcomment %}
             </div>
             {% endfor %}
         </div>
+    </div> {% endcomment %}
+
+    <div class="friendlist" >
+        <table>
+            <thead>
+                <tr>
+                    <th>친구</th>     
+                </tr>
+            </thead>
+            <tbody>
+                {% if follow %}
+                            
+                {% for user in follow.to_user.all %}
+                <tr>
+                    <td>{{user.username}}
+                        <a href = "{% url 'unlockk:unFollowing' to_user_id=user.id %}" data-url = :"{% url 'unlockk:unFollowing' to_user_id=user.id %}"
+                        class="follower">
+                        삭제
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="4">친구가 없습니다.</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="friendaddlist">     
+        <table>
+            <thead>
+                <tr>
+                    <th>친구추가</th>     
+                </tr>
+            </thead>
+            <tbody>
+                {% if users %}
+                {% for to_user in users %}
+                <tr>
+                    <td>{{to_user.username}}
+                        <a href = "{% url 'unlockk:following' to_user_id=to_user.id %}" data-url = :"{% url 'unlockk:following' to_user_id=to_user.id %}"
+                        class="follower">
+                        추가
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="4">친구가 없습니다.</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
     </div>
 </div>
 
