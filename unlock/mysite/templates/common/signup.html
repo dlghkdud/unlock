@@ -27,6 +27,7 @@
         display: block;
         height: 73vh;
         border-radius: 10px 0px 0px 10px;
+        border-right: solid black 5px;
     }
     .title{
         font-family: 'Pretendard-Regular';
@@ -104,7 +105,7 @@
 
 
 <div class="area">
-    <img class="temp" src="/static/image/temp.png">
+    <img class="temp" src="/static/image/signbag_black.png">
     <form method="post" action="{% url 'common:signup' %}" class="inbox">
         {% csrf_token %}
         {% include "form_errors.html" %}
