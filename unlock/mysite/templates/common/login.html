@@ -2,6 +2,10 @@
 {%block content %}
 
 <style>
+    @keyframes movebg {
+        0% {background-position: 0 center;}
+        100% {background-position: -80vh center;}
+    }
     body{
         margin: 0;
         padding: 0;
@@ -28,6 +32,11 @@
         height: 73vh;
         border-radius: 10px 0px 0px 10px;
         border-right: solid black 5px;
+        width: 60vh;
+        animation: movebg 3s linear infinite;
+        background-color: aqua;
+        width: 110vh;
+        background: url('/static/image/signbag_black.png') 0 center / 60vh repeat-x;
     }
     .title{
         font-family: 'Pretendard-Regular';
@@ -90,7 +99,7 @@
 
 
 <div class="area">
-    <img class="temp" src="/static/image/signbag_black.png">
+    <img class="temp">
     <form method="post" action="{% url 'common:login' %}" class="inbox">
         {% csrf_token %}
         {% include "form_errors.html" %}

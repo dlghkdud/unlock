@@ -23,6 +23,9 @@ def picrew(request):
 def home(request):
     return render(request, 'unlockk/home.html')
 
+def write(request):
+    return render(request, 'unlockk/write.html')
+
 def follow(request):
     kw = request.GET.get('kw', '')  # 검색어
     user_list = []  # 검색 결과를 담을 리스트 초기화

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{%block content %}
+
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+    }
+    .write_body{
+        width: 98%;
+        height: 87%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 2vh;
+        padding-top: 3vh;
+    }
+    .write_add{
+        display: flex;
+        border: solid 4px black;
+        width: 24vh;
+        height: 24vh;
+        border-radius: 10%;
+        align-items: center;
+        justify-content: center;
+    }
+    .write_img{
+        width: 40%;
+    }
+</style>
+
+<span class="write_body">
+    <div class="write_add">
+        <img src="/static/image/write_add.png" class="write_img">
+    </div>    
+</span>
+
+
+{% endblock %}
