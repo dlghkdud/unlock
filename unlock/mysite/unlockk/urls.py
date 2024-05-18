@@ -2,6 +2,7 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
 
+
 app_name = 'unlockk'
 
 urlpatterns = [
@@ -11,7 +12,7 @@ urlpatterns = [
     path('picrew/', views.picrew, name='picrew'),
     path('home/', views.home, name='home'),
     path('write/', views.write, name='write'),
-    path('follow/', views.follow, name='follow'),
-    path('following/<int:to_user_id>/', views.following, name="following"),
-    path('unFollowing/<int:to_user_id>/', views.unFollowing, name="unFollowing"),
+    path('friend-request/<int:user_id>/', views.friend_request, name='friend-request'),
+    path('friend-request/<int:friend_request_id>/accept/', views.friend_accept, name='friend-accept'),
+    path('friend-request/<int:friend_request_id>/reject/', views.friend_reject, name='friend-reject'),
 ]

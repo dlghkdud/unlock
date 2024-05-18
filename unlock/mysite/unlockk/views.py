@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.db.models import Q
-from .models import Follow
-from .models import Write
+from django.contrib import messages
+from .models import Friend
 
 import os
 from django.conf import settings
@@ -26,44 +25,45 @@ def home(request):
 def write(request):
     return render(request, 'unlockk/write.html')
 
-def follow(request):
-    kw = request.GET.get('kw', '')  # 검색어
-    user_list = []  # 검색 결과를 담을 리스트 초기화
+# 친구신청
+@login_required
+def friend_request(request, user_id):
+    if request.method == 'POST':
+        from_user = request.user
+        to_user = get_object_or_404(User, id=user_id)
+        if Friend.objects.filter(from_user=from_user, to_user=to_user).exists():
+            messages.error(request, "이미 친구 요청을 보냈습니다.")
+        else:
+            Friend.objects.create(from_user=from_user, to_user=to_user)
+            messages.success(request, "친구 신청을 보냈습니다.")
+        return redirect('unlockk:home')
+    else:
+        return render(request, 'unlockk/follow.html')
+ 
+# 친구신청 수락
+@login_required
+def friend_accept(request, friend_request_id):
+    friend_request = get_object_or_404(Friend, id=friend_request_id)
+    if friend_request.to_user != request.user:
+        messages.error(request, "권한이 없습니다.")
+    elif friend_request.status != 'pending':
+        messages.error(request, "이미 처리된 요청입니다.")
+    else:
+        friend_request.status = 'accepted'
+        friend_request.save()
+        messages.success(request, "친구 신청을 수락했습니다.")
+    return redirect('unlockk:home')
 
-    if kw:
-        # 검색어를 포함한 사용자를 필터링하여 리스트에 추가
-        user_list = User.objects.filter(Q(username__icontains=kw))
-
-    context = {'kw': kw, 'user_list': user_list}
-    return render(request, 'unlockk/follow.html', context)
-
-
-# 팔로우 목록
-@login_required(login_url='common:signin')
-def follow_list(request, user_id):
-    follow = get_object_or_404(Follow, user_id = user_id)
-    users = User.objects.exclude(pk = request.user.pk)     # 자기자신을 제외하고 불러옴
-    
-    context = {'follow': follow , 'users': users}
-    return render(request, 'unlockk/follow.html', context)
-    
-    
-# 팔로우
-@login_required(login_url='common:signin')
-def following(request, to_user_id):
-    to_user = get_object_or_404(User, pk = to_user_id)
-    followUser = get_object_or_404(Follow, user = request.user)
-    
-    followUser.to_user.add(to_user)
-
-    return redirect('unlockk:follow_list', user_id = request.user.id)
-    
-# 언팔로우
-@login_required(login_url='common:signin')
-def unFollowing(request, to_user_id):
-    to_user = get_object_or_404(User, pk = to_user_id)
-    followUser = get_object_or_404(Follow, user = request.user)
-    
-    followUser.to_user.remove(to_user)
-    
-    return redirect('unlockk:follow_list', user_id = request.user.id)
+# 친구신청 거절
+@login_required
+def friend_reject(request, friend_request_id):
+    friend_request = get_object_or_404(Friend, id=friend_request_id)
+    if friend_request.to_user != request.user:
+        messages.error(request, "권한이 없습니다.")
+    elif friend_request.status != 'pending':
+        messages.error(request, "이미 처리된 요청입니다.")
+    else:
+        friend_request.status = 'rejected'
+        friend_request.save()
+        messages.success(request, "친구 신청을 거절했습니다.")
+    return redirect('unlockk:home')

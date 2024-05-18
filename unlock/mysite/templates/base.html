@@ -119,10 +119,10 @@
             <img class="yellow" onclick="setTheme('yellow')" src="/static/image/yellow.png">
 
             {% if user.is_authenticated %}
-            <a href="{% url 'unlockk:follow' %}" class="friends"><img class="friends-icon" src="/static/image/group.png"></a>
+            <a href="{% url 'unlockk:friend-request' user.id %}" class="friends"><img class="friends-icon" src="/static/image/group.png"></a>
             <a class="logout" href="{% url 'common:logout' %}">logout</a>
             {% endif %}
-        </span>
+        </span> 
         
         
         

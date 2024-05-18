@@ -10,5 +10,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('unlockk/', include('unlockk.urls')),
     path('common/', include('common.urls')),
-    path('', views.index, name='index')
+    path('', views.index, name='index'),
 ]
