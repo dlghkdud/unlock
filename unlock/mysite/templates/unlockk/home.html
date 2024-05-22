@@ -1,32 +1,265 @@
 {% extends 'base.html' %}
-{%block content %}
-<style>
-    body{
-        margin: 0;
-        padding: 0;
-        height: 100vh;
-    }
-</style>
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .sidebar {
+            position: absolute;
+            top: 78px;
+            right: 8px;
+            width: 500px;
+            height: 1000px;
+            border-left: 1px solid #ccc;
+        }
+        .area {
+            display: flex;
+            justify-content: space-between;
+        }
+        .group, .user {
+            width: 30%;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        .list {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 10px;
+            overflow-y: auto;
+        }
+        .plus-icon {
+            color: black;
+            font-size: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .popup-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 80%;
+            max-height: 80%;
+            overflow-y: auto;
+        }
+        .follow-button {
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .group-images {
+            width: 270px; 
+            height: 300px; 
+            padding: 10px;
+            cursor: pointer;
+        }
+        .group-image-container {
+            display: flex;
+            flex-wrap: wrap;
+            width: 70%;
+        }
+        .group-image-container img {
+            width: 270px;
+            height: 300px; 
+            margin: 10px;
+        }
+        .user-list {
+            padding: 10px;
+            border: 1px solid #000000;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        .user-profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .user-profile img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .user-info {
+            flex-grow: 1;
+        }
+        .user-info p {
+            margin: 5px 0;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.0.7/css/boxicons.min.css">
+</head>
+<body>
+    <div class="area" id="area-container">
+            <img src="/static/image/Group 80.png" alt="Add" onclick="openPopup()" class="group-images">
+    </div>
+    <div class="group-image-container" id="image-container"></div>
 
-<p>홈화면</p>
-
-<div class="area">
-    <div class="group">
-        <!-- 노트 그룹 -->
-        <div class="note">
-            <!-- 노트 -->
+    <!-- 팔로우 목록 팝업 -->
+    <div class="popup" id="popup-container">
+        <div class="popup-content">
+            <h2>팔로우 목록</h2>
         </div>
     </div>
-
-    <div class="user">
-        <!-- 유저 정보 -->
-        <div class="info">
-            <!-- 프로필, 아이디, 이메일 -->
-        </div>
-        <div class="list">
-            <!-- 친구 목록 -->
+    <div class="sidebar">
+        <h2>팔로우 목록</h2>
+        <div class="user-list">
+            <div class="user-profile">
+                <img src="프로필_사진_링크" alt="프로필 사진">
+                <div class="user-info">
+                    <p>유저 이름</p>
+                    <p>이메일 주소</p>
+                </div>
+            </div>
+            <div class="user-profile">
+                <img src="프로필_사진_링크" alt="프로필 사진">
+                <div class="user-info">
+                    <p>유저 이름</p>
+                    <p>이메일 주소</p>
+                </div>
+            </div>
+            <div class="user-profile">
+                <img src="프로필_사진_링크" alt="프로필 사진">
+                <div class="user-info">
+                    <p>유저 이름</p>
+                    <p>이메일 주소</p>
+                </div>
+            </div>
+            <div class="user-profile">
+                <img src="프로필_사진_링크" alt="프로필 사진">
+                <div class="user-info">
+                    <p>유저 이름</p>
+                    <p>이메일 주소</p>
+                </div>
+            </div>
+            <div class="user-profile">
+                <img src="프로필_사진_링크" alt="프로필 사진">
+                <div class="user-info">
+                    <p>유저 이름</p>
+                    <p>이메일 주소</p>
+                </div>
+            </div>
+            <div class="user-profile">
+                <img src="프로필_사진_링크" alt="프로필 사진">
+                <div class="user-info">
+                    <p>유저 이름</p>
+                    <p>이메일 주소</p>
+                </div>
+            </div>
+            <div class="user-profile">
+                <img src="프로필_사진_링크" alt="프로필 사진">
+                <div class="user-info">
+                    <p>유저 이름</p>
+                    <p>이메일 주소</p>
+                </div>
+            </div>
+            <div class="user-profile">
+                <img src="프로필_사진_링크" alt="프로필 사진">
+                <div class="user-info">
+                    <p>유저 이름</p>
+                    <p>이메일 주소</p>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+    <script>
+        // 사용자 팔로우
+        function followUser(userId) {
+            fetch(`/unlockk/following/${userId}/`)
+                .then(response => {
+                    if (response.ok) {
+                        // 팔로우한 사용자 정보 가져오기
+                        var username = document.querySelector(`#user-${userId}`).textContent;
+                        var email = document.querySelector(`#user-${userId} p.email`).textContent;
 
+                        // 박스 추가
+                        var newUser = document.createElement("div");
+                        newUser.classList.add("user");
+                        newUser.innerHTML = `
+                            <div class="list">
+                                <h2>팔로우한 사용자</h2>
+                                <ul>
+                                    <li>${username}</li>
+                                    <p>Email: ${email}</p>
+                                </ul>
+                            </div>
+                        `;
+                        document.getElementById("area-container").appendChild(newUser);
+                        
+                        // 팔로우한 사용자를 팝업창에서 제거
+                        var userElement = document.getElementById(`user-${userId}`);
+                        userElement.parentNode.removeChild(userElement);
+
+                        // 팝업창 닫기
+                        var popup = document.getElementById("popup-container");
+                        popup.style.display = "none";
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+        const images = [
+            "/static/image/Mask group-3.png",
+            "/static/image/Mask group-2.png",
+            "/static/image/Mask group-1.png",
+            "/static/image/Mask group.png"
+        ];
+
+        const imageContainer = document.getElementById('image-container');
+
+        document.querySelector('.group-images').addEventListener('click', function() {
+            // 현재 이미지의 인덱스 가져오기
+            const currentImageIndex = imageContainer.querySelectorAll('img').length;
+
+            // 이미지 엘리먼트 생성 및 설정
+            const imageElement = document.createElement('img');
+            const nextImageIndex = currentImageIndex % images.length;
+            imageElement.src = images[nextImageIndex];
+            imageElement.width = 270;
+            imageElement.height = 300;
+
+            // 이미지 컨테이너에 이미지 추가
+            imageContainer.appendChild(imageElement);
+        });
+        // 팝업 열기
+        function openPopup() {
+            var popup = document.getElementById("popup-container");
+            popup.style.display = "flex";
+        }
+    
+        // 팝업 외부 클릭 시 팝업 닫기
+        window.onclick = function(event) {
+            var popup = document.getElementById("popup-container");
+            if (event.target == popup) {
+                popup.style.display = "none";
+            }
+        }
+        </script>
+    
 {% endblock %}
+</body>
+</html>
