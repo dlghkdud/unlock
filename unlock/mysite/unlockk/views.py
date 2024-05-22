@@ -25,9 +25,11 @@ def home(request):
 def write(request):
     return render(request, 'unlockk/write.html')
 
+
 # 친구신청
 @login_required
 def friend_request(request, user_id):
+    users = User.objects.all()
     if request.method == 'POST':
         from_user = request.user
         to_user = get_object_or_404(User, id=user_id)
@@ -38,7 +40,7 @@ def friend_request(request, user_id):
             messages.success(request, "친구 신청을 보냈습니다.")
         return redirect('unlockk:home')
     else:
-        return render(request, 'unlockk/follow.html')
+        return render(request, 'unlockk/follow.html', {'users': users})
  
 # 친구신청 수락
 @login_required

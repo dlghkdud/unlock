@@ -1,64 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
 
+{% if messages %}
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            {% for message in messages %}
+            alert("{{ message }}");
+            {% endfor %}
+        });
+    </script>
+{% endif %}
 
-<style>
-    /* 팝업 스타일 */
-    .popup {
-        display: none; /* 기본적으로 숨김 */
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.5); /* 배경에 투명도 부여 */
-    }
-
-    .popup-content {
-        background-color: #fefefe;
-        margin: 10% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-    }
-
-    .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-    .bx-user-plus {
-        color: white; 
-        font-size: 68px; 
-    }
-    .friends-icon {
-        position: relative;
-        top: -39px; 
-    }
-</style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.0.7/css/boxicons.min.css">
+<ul>
+    {% for user in users %}
+    <li>
+        {{ user.username }}
+        <button type="submit">팔로우</button>
+    </li>
+    {% endfor %}
+</ul>
 
 
-<div class="popup">
-    <div class="popup-content">
 
-    </div>
-    <div class="close">
-
-    </div>
-    <div class="bx-user-plus">
-        
-    </div>
-</div>
 {% endblock %}
