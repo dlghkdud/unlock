@@ -30,7 +30,8 @@
         border: solid 5px black;
         background-image: url("../../static/image/picrew/etc/background.png");
         background-repeat: no-repeat;
-        background-size: cover;
+        background-size: 110%;
+        background-position: 40% 0;
     }
     .overlay-img {
         width: 100%;
@@ -63,6 +64,7 @@
         height: 8vh;
         border: solid 5px black;
         border-radius: 15px;
+        cursor: pointer;
     }
     .save {
         display: block;
@@ -127,7 +129,7 @@
 
 <div class="area">
     <div class="img">
-        <img id="main-picrew" class="overlay-img" src="/static/image/picrew/etc/head.png" alt="Main Image">
+        <img id="main-picrew" class="overlay-img" src="/static/image/picrew/etc/body.png" alt="Main Image">
     </div>
     <div class="option">
         <div class="carousel-container">
@@ -141,17 +143,6 @@
                     <img src="/static/image/picrew/hair/spade.png" alt="Spade Hair" onclick="updateMainImage(this)">
                     <img src="/static/image/picrew/hair/x.png" alt="X Hair" onclick="updateMainImage(this)">
                 </div>
-                <div class="carousel-page">
-                    <img src="/static/image/picrew/haircolor/1.png" alt="yellow" onclick="updateMainImage(this)">
-                    <img src="/static/image/picrew/haircolor/2.png" alt="yellow2" onclick="updateMainImage(this)">
-                    <img src="/static/image/picrew/haircolor/3.png" alt="pink" onclick="updateMainImage(this)">
-                    <img src="/static/image/picrew/haircolor/4.png" alt="green" onclick="updateMainImage(this)">
-                    <img src="/static/image/picrew/haircolor/5.png" alt="amu" onclick="updateMainImage(this)">
-                    <img src="/static/image/picrew/haircolor/6.png" alt="blue" onclick="updateMainImage(this)">
-                    <img src="/static/image/picrew/haircolor/7.png" alt="pink2" onclick="updateMainImage(this)">
-                    <img src="/static/image/picrew/haircolor/8.png" alt="pink3" onclick="updateMainImage(this)">
-                </div>
-                <!-- Add more carousel-page divs as necessary -->
             </div>
         </div>
         <div class="navigation">
@@ -161,13 +152,13 @@
     </div>
 
     <div class="color">
-        <div class="color1"><h4>hair</h4></div>
-        <div class="color2"><h4>haircolor</h4></div>
-        <div class="color3"><h4>hairpiece</h4></div>
-        <div class="color4"><h4>clothes</h4></div>
-        <div class="color5"><h4>eyes</h4></div>
-        <div class="color6"><h4>eyecolor</h4></div>
-        <div class="color7"><h4>etc</h4></div>
+        <div class="color1" onclick="updateCarouselContent('hair')"><h4>hair</h4></div>
+        <div class="color2" onclick="updateCarouselContent('haircolor')"><h4>haircolor</h4></div>
+        <div class="color3" onclick="updateCarouselContent('hairpiece')"><h4>hairpiece</h4></div>
+        <div class="color4" onclick="updateCarouselContent('clothes')"><h4>clothes</h4></div>
+        <div class="color5" onclick="updateCarouselContent('eyes')"><h4>eyes</h4></div>
+        <div class="color6" onclick="updateCarouselContent('eyecolor')"><h4>eyecolor</h4></div>
+        <div class="color7" onclick="updateCarouselContent('etc')"><h4>etc</h4></div>
     </div>
 </div>
 
@@ -204,6 +195,131 @@
     function updateMainImage(imageElement) {
         const mainImage = document.getElementById('main-picrew');
         mainImage.src = imageElement.src;
+    }
+
+    function updateCarouselContent(type) {
+        const carousel = document.getElementById('carousel');
+        let content = '';
+
+        if (type === 'hair') {
+            content = `
+                <div class="carousel-page">
+                    <img src="/static/image/picrew/hair/amu.png" alt="Amu Hair" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/hair/heart.png" alt="Heart Hair" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/hair/black.png" alt="Black Hair" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/hair/clober.png" alt="Clober Hair" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/hair/dia.png" alt="Dia Hair" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/hair/spade.png" alt="Spade Hair" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/hair/x.png" alt="X Hair" onclick="updateMainImage(this)">
+                </div>
+            `;
+        } else if (type === 'haircolor') {
+            content = `
+                <div class="carousel-page">
+                    <img src="/static/image/picrew/haircolor/1.png" alt="hair yellow" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/haircolor/2.png" alt="hair yellow2" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/haircolor/3.png" alt="hair pink" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/haircolor/4.png" alt="hair green" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/haircolor/5.png" alt="hair amu" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/haircolor/6.png" alt="hair blue" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/haircolor/7.png" alt="hair pink2" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/haircolor/8.png" alt="hair pink3" onclick="updateMainImage(this)">
+                </div>
+            `;
+        } else if (type === 'hairpiece') {
+            content = `
+                <div class="carousel-page">
+                    <img src="/static/image/picrew/hairpiece/clober.png" alt="clober hairpiece" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/hairpiece/spade.png" alt="spade hairpiece" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/hairpiece/dia.png" alt="dia hairpiece" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/hairpiece/black.png" alt="black hairpiece" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/hairpiece/angel.png" alt="angel hairpiece" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/hairpiece/devil.png" alt="devil hairpiece" onclick="updateMainImage(this)">
+                </div>
+            `;
+        } else if (type === 'clothes') {
+            content = `
+                <div class="carousel-page">
+                    <img src="/static/image/picrew/clothes/amu.png" alt="amu clothes" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/clothes/heart.png" alt="heart clothes" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/clothes/clober.png" alt="clober clothes" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/clothes/spade.png" alt="spade clothes" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/clothes/dia.png" alt="dia clothes" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/clothes/black.png" alt="black clothes" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/clothes/angel.png" alt="angel clothes" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/clothes/devil.png" alt="devil clothes" onclick="updateMainImage(this)">
+                </div>
+            `;
+        } else if (type === 'eyes') {
+            content = `
+                <div class="carousel-page">
+                    <img src="/static/image/picrew/eyes/1.png" alt="eyes1" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyes/2.png" alt="eyes2" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyes/3.png" alt="eyes3" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyes/4.png" alt="eyes4" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyes/5.png" alt="eyes5" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyes/6.png" alt="eyes6" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyes/7.png" alt="eyes7" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyes/8.png" alt="eyes8" onclick="updateMainImage(this)">
+                </div>
+            `;
+        } else if (type === 'eyecolor') {
+            content = `
+                <div class="carousel-page">
+                    <img src="/static/image/picrew/eyecolor/pink1.png" alt="pink1" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyecolor/pink2.png" alt="pink2" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyecolor/pink3.png" alt="pink3" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyecolor/pink4.png" alt="pink4" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyecolor/pink5.png" alt="pink5" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyecolor/green1.png" alt="green1" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyecolor/green2.png" alt="green2" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyecolor/green3.png" alt="green3" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyecolor/green4.png" alt="green4" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyecolor/green5.png" alt="green5" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyecolor/blue1.png" alt="blue1" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyecolor/blue2.png" alt="blue2" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyecolor/blue3.png" alt="blue3" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyecolor/blue4.png" alt="blue4" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyecolor/blue5.png" alt="blue5" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyecolor/yellow1.png" alt="yellow1" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyecolor/yellow2.png" alt="yellow2" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyecolor/yellow3.png" alt="yellow3" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyecolor/yellow4.png" alt="yellow4" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyecolor/yellow5.png" alt="yellow5" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyecolor/purple1.png" alt="purple1" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyecolor/purple2.png" alt="purple2" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyecolor/purple3.png" alt="purple3" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyecolor/purple4.png" alt="purple4" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyecolor/purple5.png" alt="purple5" onclick="updateMainImage(this)">
+                </div>
+            `;
+        } else if (type === 'etc') {
+            content = `
+                <div class="carousel-page">
+                    <img src="/static/image/picrew/mouse/1.png" alt="eyes1" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/mouse/2.png" alt="mouse2" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/mouse/3.png" alt="mouse3" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/mouse/4.png" alt="mouse4" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/mouse/5.png" alt="mouse5" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyebrow/1.png" alt="eyebrow1" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyebrow/2.png" alt="eyebrow2" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyebrow/3.png" alt="eyebrow3" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyebrow/4.png" alt="eyebrow4" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/eyebrow/5.png" alt="eyebrow5" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/etc/ear.png" alt="ear" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/etc/nose.png" alt="nose" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/cheek/1.png" alt="cheek1" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/cheek/2.png" alt="cheek2" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/cheek/3.png" alt="cheek3" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/cheek/4.png" alt="cheek4" onclick="updateMainImage(this)">
+                    <img src="/static/image/picrew/cheek/5.png" alt="cheek5" onclick="updateMainImage(this)">
+                </div>
+            `;
+        }
+
+        carousel.innerHTML = content;
+        currentSlide = 0;
+        updateCarousel();
     }
 </script>
 
