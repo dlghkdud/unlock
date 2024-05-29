@@ -1,5 +1,3 @@
-{% load static %}
-
 <!doctype html>
 <html lang="ko">
 <head>
@@ -9,7 +7,6 @@
     <title>너의 마음을 언록!☆</title>
 
     <style>
-    
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
     :root,
@@ -19,6 +16,7 @@
         --start-border : solid 3px white;
         --start-calli : url("../../static/image/calli_black.png");
         --start-sign : white;
+        --sign-bg : url("../../static/image/label/blacklabel.png");
     }
     :root.pink{
         --header-color: #FFA0AB;
@@ -26,6 +24,7 @@
         --start-border : solid 3px black;
         --start-calli : url("../../static/image/calli_pink.png");
         --start-sign: black;
+        --sign-bg : url("../../static/image/label/pinklabel.png");
     }
     :root.yellow{
         --header-color: #FFCB7C;
@@ -33,8 +32,8 @@
         --start-border : solid 3px black;
         --start-calli : url("../../static/image/calli_yellow.png");
         --start-sign : black;
+        --sign-bg : url("../../static/image/label/yellowlabel.png");
     }
-
 
     @font-face {
         font-family: 'Pretendard-Regular';
@@ -50,32 +49,20 @@
         background-color: var(--header-color);
         width: 100%;
         height: 8vh;
-        /* border-bottom: solid 2px black;
-        border-top: solid 2px black; */
     }
     .right{
         display: flex;
-
     }
     .logo{
         display: flex;
         margin-left: 0.5%;
     }
-    
-    .black{
-        display: block;
-    }
-    .pink{
-        display: block;
-
-    }
-    .yellow{
+    .black, .pink, .yellow{
         display: block;
     }
     .friends-icon{
         display: block;
         width: 65%;
-        /* height: 90%; */
         margin-top: 20%;
     }
     .friends{
@@ -100,40 +87,57 @@
         margin-left: -4%;
         margin-right: -10%;
     }
-    
     </style>
-
 </head>
 
 <body>
     <header class="header">
         {% if user.is_authenticated %}
-        <a  href="{% url 'unlockk:home' %}" class="logo"><img src="/static/image/log.png"></a>
+        <a href="{% url 'unlockk:home' %}" class="logo"><img src="/static/image/log.png"></a>
         {% else %}
-        <a  href="{% url 'unlockk:index' %}" class="logo"><img src="/static/image/log.png"></a>
+        <a href="{% url 'unlockk:index' %}" class="logo"><img src="/static/image/log.png"></a>
         {% endif %}
 
         <span class="right">
-            <img class="black" onclick="setTheme('black')" src="/static/image/black.png">
-            <img class="pink" onclick="setTheme('pink')" src="/static/image/pink.png">
-            <img class="yellow" onclick="setTheme('yellow')" src="/static/image/yellow.png">
+            <img class="black" id="BlackButton" onclick="setTheme('black')" src="/static/image/black.png">
+            <img class="pink" id="PinkButton" onclick="setTheme('pink')" src="/static/image/pink.png">
+            <img class="yellow" id="YellowButton" onclick="setTheme('yellow')" src="/static/image/yellow.png">
 
             {% if user.is_authenticated %}
             <a href="{% url 'unlockk:friend-request' user.id %}" class="friends"><img class="friends-icon" src="/static/image/group.png"></a>
             <a class="logout" href="{% url 'common:logout' %}">logout</a>
             {% endif %}
         </span> 
-        
-        
-        
     </header>
 
     <script>
+        const themeImages = {
+            black: [
+                "/static/image/group/non/Mask group-3.png",
+                "/static/image/group/non/Mask group-2.png",
+                "/static/image/group/non/Mask group-1.png",
+                "/static/image/group/non/Mask group.png"
+            ],
+            pink: [
+                "/static/image/group/color/1.png",
+                "/static/image/group/color/2.png",
+                "/static/image/group/color/3.png",
+                "/static/image/group/color/4.png"
+            ],
+            yellow: [
+                "/static/image/group/color/1.png",
+                "/static/image/group/color/2.png",
+                "/static/image/group/color/3.png",
+                "/static/image/group/color/4.png"
+            ]
+        };
+        
         // 페이지 로드 시에 저장된 테마를 불러와 적용
         window.onload = function() {
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme) {
                 document.documentElement.className = savedTheme;
+                updateImages(savedTheme);
             }
         }
     
@@ -141,15 +145,56 @@
         const setTheme = theme => {
             document.documentElement.className = theme;
             localStorage.setItem('theme', theme);
+            updateImages(theme);
+        }
+
+        // 테마 변경 시에 이미지 업데이트
+        const updateImages = theme => {
+            const signBg = getComputedStyle(document.documentElement).getPropertyValue('--sign-bg').trim();
+            const labelElements = document.querySelectorAll('.temp .label, .temp .label0');
+
+            labelElements.forEach(element => {
+                const newSrc = signBg.slice(4, -1).replace(/"/g, '');
+                element.src = newSrc;
+            });
+
+            const imageContainer = document.getElementById('image-container');
+            const images = themeImages[theme];
+
+            // 기존 이미지 제거
+            while (imageContainer.firstChild) {
+                imageContainer.removeChild(imageContainer.firstChild);
+            }
+
+            // 새로운 이미지 추가
+            images.forEach(src => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.width = 270;
+                img.height = 300;
+                imageContainer.appendChild(img);
+            });
+        }
+
+        // 팝업 열기
+        function openPopup() {
+            var popup = document.getElementById("popup-container");
+            popup.style.display = "flex";
+        }
+    
+        // 팝업 외부 클릭 시 팝업 닫기
+        window.onclick = function(event) {
+            var popup = document.getElementById("popup-container");
+            if (event.target == popup) {
+                popup.style.display = "none";
+            }
         }
     </script>
 
-<!-- 기본 템플릿 안에 삽입될 내용 Start -->    
-{% block content %}
-{% endblock %}
-<!-- 기본 템플릿 안에 삽입될 내용 End -->
-
-
+    <!-- 기본 템플릿 안에 삽입될 내용 Start -->    
+    {% block content %}
+    {% endblock %}
+    <!-- 기본 템플릿 안에 삽입될 내용 End -->
 
 </body>
 </html>

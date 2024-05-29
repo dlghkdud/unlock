@@ -13,17 +13,22 @@
             height: 100vh;
             font-family: Arial, sans-serif;
         }
+        .body2{
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 2.5%;
+            margin-left: 3%;
+            margin-right: 3%;
+        }
         .sidebar {
-            position: absolute;
-            top: 78px;
-            right: 8px;
-            width: 500px;
-            height: 1000px;
-            border-left: 1px solid #ccc;
+            display: flex;
+            flex-direction: column;
+            width: 35%;
         }
         .area {
             display: flex;
             justify-content: space-between;
+            width: 30%;
         }
         .group, .user {
             width: 30%;
@@ -90,9 +95,12 @@
         }
         .user-list {
             padding: 10px;
-            border: 1px solid #000000;
-            border-radius: 10px;
+            border-width: 0px 4px 4px 4px ;
+            border-style: solid;
+            border-radius: 0 0 15px 15px;
             margin-top: 10px;
+            height: 65vh;
+            overflow: hidden;
         }
         .user-profile {
             display: flex;
@@ -111,12 +119,21 @@
         .user-info p {
             margin: 5px 0;
         }
+        .follow-list{
+            background-color: var(--header-color);
+            color: #fff;
+            height: 10vh;
+            border-radius: 15px 15px 0 0;
+            border: black 4px solid;
+            margin-bottom: -2vh;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.0.7/css/boxicons.min.css">
 </head>
 <body>
+    <div class="body2">
     <div class="area" id="area-container">
-            <img src="/static/image/Group 80.png" alt="Add" onclick="openPopup()" class="group-images">
+            <img src="/static/image/group/Group 80.png" alt="Add" onclick="openPopup()" class="group-images">
     </div>
     <div class="group-image-container" id="image-container"></div>
 
@@ -127,7 +144,7 @@
         </div>
     </div>
     <div class="sidebar">
-        <h2>팔로우 목록</h2>
+        <div class="follow-list">follow</div>
         <div class="user-list">
             <div class="user-profile">
                 <img src="프로필_사진_링크" alt="프로필 사진">
@@ -187,6 +204,7 @@
             </div>
         </div>
     </div>
+    </div>
     <script>
         // 사용자 팔로우
         function followUser(userId) {
@@ -223,10 +241,10 @@
                 .catch(error => console.error('Error:', error));
         }
         const images = [
-            "/static/image/Mask group-3.png",
-            "/static/image/Mask group-2.png",
-            "/static/image/Mask group-1.png",
-            "/static/image/Mask group.png"
+            "/static/image/group/non/Mask group-3.png",
+            "/static/image/group/non/Mask group-2.png",
+            "/static/image/group/non/Mask group-1.png",
+            "/static/image/group/non/Mask group.png"
         ];
 
         const imageContainer = document.getElementById('image-container');

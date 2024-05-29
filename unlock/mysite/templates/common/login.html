@@ -2,10 +2,6 @@
 {%block content %}
 
 <style>
-    @keyframes movebg {
-        0% {background-position: 0 center;}
-        100% {background-position: -80vh center;}
-    }
     body{
         margin: 0;
         padding: 0;
@@ -27,16 +23,14 @@
         border-radius: 20px;
         flex-direction: row;
     }
-    .temp{
-        display: block;
+    .temp {
+        display: flex;
+        flex-direction: column;
         height: 73vh;
         border-radius: 10px 0px 0px 10px;
         border-right: solid black 5px;
-        width: 60vh;
-        animation: movebg 3s linear infinite;
-        background-color: aqua;
-        width: 110vh;
-        background: url('/static/image/signbag_black.png') 0 center / 60vh repeat-x;
+        width: 127vh;
+        overflow: hidden;
     }
     .title{
         font-family: 'Pretendard-Regular';
@@ -87,19 +81,52 @@
         display: block;
         font-family: 'Pretendard-Regular';
         color:black;
-        font-size: 33px;
+        font-size: 30px;
         text-decoration: none;
+        margin-left: 3.5%;
     }
     .inbox{
         display: block;
         width: 1600px;
         margin-left: 3.5%;
     }
+    .label0, .label {
+        position: relative;
+        display: flex;
+        width: 246%;
+        left: -5%;
+        animation: move 8s ease-in-out infinite alternate-reverse;
+    }
+    .label0 {
+        animation: move1 5s linear infinite;
+    }
+    .label {
+        left: -30%;
+        animation: move 5s linear infinite;
+    }
+    @keyframes move {
+        0% { object-position: 0 center; }
+        100% { object-position: -500px center; }
+    }
+    @keyframes move1 {
+        100% { object-position: 0 center; }
+        0% { object-position: -500px center; }
+    }
 </style>
 
 
 <div class="area">
-    <img class="temp">
+    <div class="temp">
+        <img src="../../static/image/label/pinklabel.png" class="label0">
+        <img src="../../static/image/label/pinklabel.png" class="label">
+        <img src="../../static/image/label/pinklabel.png" class="label0">
+        <img src="../../static/image/label/blacklabel.png" class="label">
+        <img src="../../static/image/label/blacklabel.png" class="label0">
+        <img src="../../static/image/label/blacklabel.png" class="label">
+        <img src="../../static/image/label/blacklabel.png" class="label0">
+        <img src="../../static/image/label/blacklabel.png" class="label">
+        <img src="../../static/image/label/blacklabel.png" class="label0">
+    </div>  
     <form method="post" action="{% url 'common:login' %}" class="inbox">
         {% csrf_token %}
         {% include "form_errors.html" %}
@@ -118,9 +145,20 @@
         
 
         <button type="submit" class="signup-btn">Sign in</button>
-        <a class="sign" href="{% url 'common:signup' %}">If you have an account, please sign in</p>
+        <a class="sign" href="{% url 'common:signup' %}">If you don't have an account, please sign up</p>
     </form>
     
 </div>
+
+<script>
+    // 페이지 로드 시에 저장된 테마를 불러와 적용
+    window.onload = function() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.documentElement.className = savedTheme;
+            updateImages(savedTheme);
+        }
+    }
+</script>
 
 {% endblock %}
