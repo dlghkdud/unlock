@@ -2,13 +2,11 @@
 {% block content %}
 
 {% if messages %}
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function () {
-            {% for message in messages %}
-            alert("{{ message }}");
-            {% endfor %}
-        });
-    </script>
+    <div>
+        {% for message in messages %}
+            {{ message.tags }}! {{ message.message }}
+        {% endfor %}
+    </div>
 {% endif %}
 
 <ul>

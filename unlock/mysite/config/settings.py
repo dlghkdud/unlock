@@ -27,7 +27,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -121,3 +120,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # 로그인 성공후 이동하는 URL
 LOGIN_REDIRECT_URL = '../../unlockk/home'
+
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'debug',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'error',
+}
