@@ -180,9 +180,7 @@
 </div>
 
 <a class="savetext" href="/unlockk/">
-    <button class="save">
-        save
-    </button>
+    <button class="save" onclick="saveProfileImage()">save</button>
 </a>
 
 <script>
@@ -251,93 +249,93 @@
             ];
         } else if (type === 'haircolor') {
             images = [
-            "/static/image/picrew/haircolor/1.png",
-            "/static/image/picrew/haircolor/2.png",
-            "/static/image/picrew/haircolor/3.png",
-            "/static/image/picrew/haircolor/4.png",
-            "/static/image/picrew/haircolor/5.png",
-            "/static/image/picrew/haircolor/6.png",
-            "/static/image/picrew/haircolor/7.png",
-            "/static/image/picrew/haircolor/8.png"
+                "/static/image/picrew/haircolor/1.png",
+                "/static/image/picrew/haircolor/2.png",
+                "/static/image/picrew/haircolor/3.png",
+                "/static/image/picrew/haircolor/4.png",
+                "/static/image/picrew/haircolor/5.png",
+                "/static/image/picrew/haircolor/6.png",
+                "/static/image/picrew/haircolor/7.png",
+                "/static/image/picrew/haircolor/8.png"
             ];
         } else if (type === 'hairpiece') {
             images = [
-            "/static/image/picrew/hairpiece/clober.png",
-            "/static/image/picrew/hairpiece/spade.png",
-            "/static/image/picrew/hairpiece/dia.png",
-            "/static/image/picrew/hairpiece/black.png",
-            "/static/image/picrew/hairpiece/angel.png",
-            "/static/image/picrew/hairpiece/devil.png"
+                "/static/image/picrew/hairpiece/clober.png",
+                "/static/image/picrew/hairpiece/spade.png",
+                "/static/image/picrew/hairpiece/dia.png",
+                "/static/image/picrew/hairpiece/black.png",
+                "/static/image/picrew/hairpiece/angel.png",
+                "/static/image/picrew/hairpiece/devil.png"
             ];
         } else if (type === 'clothes') {
             images = [
-            "/static/image/picrew/clothes/amu.png",
-            "/static/image/picrew/clothes/heart.png",
-            "/static/image/picrew/clothes/clober.png",
-            "/static/image/picrew/clothes/spade.png",
-            "/static/image/picrew/clothes/dia.png",
-            "/static/image/picrew/clothes/black.png",
-            "/static/image/picrew/clothes/angel.png",
-            "/static/image/picrew/clothes/devil.png"
+                "/static/image/picrew/clothes/amu.png",
+                "/static/image/picrew/clothes/heart.png",
+                "/static/image/picrew/clothes/clober.png",
+                "/static/image/picrew/clothes/spade.png",
+                "/static/image/picrew/clothes/dia.png",
+                "/static/image/picrew/clothes/black.png",
+                "/static/image/picrew/clothes/angel.png",
+                "/static/image/picrew/clothes/devil.png"
             ];
         } else if (type === 'eyes') {
             images = [
-            "/static/image/picrew/eyes/1.png",
-            "/static/image/picrew/eyes/2.png",
-            "/static/image/picrew/eyes/3.png",
-            "/static/image/picrew/eyes/4.png",
-            "/static/image/picrew/eyes/5.png",
-            "/static/image/picrew/eyes/6.png",
-            "/static/image/picrew/eyes/7.png",
-            "/static/image/picrew/eyes/8.png"
+                "/static/image/picrew/eyes/1.png",
+                "/static/image/picrew/eyes/2.png",
+                "/static/image/picrew/eyes/3.png",
+                "/static/image/picrew/eyes/4.png",
+                "/static/image/picrew/eyes/5.png",
+                "/static/image/picrew/eyes/6.png",
+                "/static/image/picrew/eyes/7.png",
+                "/static/image/picrew/eyes/8.png"
             ];
         } else if (type === 'eyecolor') {
             images = [
-            "/static/image/picrew/eyecolor/blue1.png",
-            "/static/image/picrew/eyecolor/blue2.png",
-            "/static/image/picrew/eyecolor/blue2.png",
-            "/static/image/picrew/eyecolor/blue4.png",
-            "/static/image/picrew/eyecolor/blue5.png",
-            "/static/image/picrew/eyecolor/green1.png",
-            "/static/image/picrew/eyecolor/green2.png",
-            "/static/image/picrew/eyecolor/green3.png",
-            "/static/image/picrew/eyecolor/green4.png",
-            "/static/image/picrew/eyecolor/green5.png",
-            "/static/image/picrew/eyecolor/pink1.png",
-            "/static/image/picrew/eyecolor/pink2.png",
-            "/static/image/picrew/eyecolor/pink3.png",
-            "/static/image/picrew/eyecolor/pink4.png",
-            "/static/image/picrew/eyecolor/pink5.png",
-            "/static/image/picrew/eyecolor/purple1.png",
-            "/static/image/picrew/eyecolor/purple2.png",
-            "/static/image/picrew/eyecolor/purple3.png",
-            "/static/image/picrew/eyecolor/purple4.png",
-            "/static/image/picrew/eyecolor/purple5.png",
-            "/static/image/picrew/eyecolor/yellow1.png",
-            "/static/image/picrew/eyecolor/yellow2.png",
-            "/static/image/picrew/eyecolor/yellow3.png",
-            "/static/image/picrew/eyecolor/yellow4.png",
-            "/static/image/picrew/eyecolor/yellow5.png"
+                "/static/image/picrew/eyecolor/blue1.png",
+                "/static/image/picrew/eyecolor/blue2.png",
+                "/static/image/picrew/eyecolor/blue2.png",
+                "/static/image/picrew/eyecolor/blue4.png",
+                "/static/image/picrew/eyecolor/blue5.png",
+                "/static/image/picrew/eyecolor/green1.png",
+                "/static/image/picrew/eyecolor/green2.png",
+                "/static/image/picrew/eyecolor/green3.png",
+                "/static/image/picrew/eyecolor/green4.png",
+                "/static/image/picrew/eyecolor/green5.png",
+                "/static/image/picrew/eyecolor/pink1.png",
+                "/static/image/picrew/eyecolor/pink2.png",
+                "/static/image/picrew/eyecolor/pink3.png",
+                "/static/image/picrew/eyecolor/pink4.png",
+                "/static/image/picrew/eyecolor/pink5.png",
+                "/static/image/picrew/eyecolor/purple1.png",
+                "/static/image/picrew/eyecolor/purple2.png",
+                "/static/image/picrew/eyecolor/purple3.png",
+                "/static/image/picrew/eyecolor/purple4.png",
+                "/static/image/picrew/eyecolor/purple5.png",
+                "/static/image/picrew/eyecolor/yellow1.png",
+                "/static/image/picrew/eyecolor/yellow2.png",
+                "/static/image/picrew/eyecolor/yellow3.png",
+                "/static/image/picrew/eyecolor/yellow4.png",
+                "/static/image/picrew/eyecolor/yellow5.png"
             ];
         } else if (type === 'etc') {
             images = [
-            "/static/image/picrew/etc/nose.png",
-            "/static/image/picrew/etc/ear.png",
-            "/static/image/picrew/eyebrow/1.png",
-            "/static/image/picrew/eyebrow/2.png",
-            "/static/image/picrew/eyebrow/3.png",
-            "/static/image/picrew/eyebrow/4.png",
-            "/static/image/picrew/eyebrow/5.png",
-            "/static/image/picrew/cheek/1.png",
-            "/static/image/picrew/cheek/2.png",
-            "/static/image/picrew/cheek/3.png",
-            "/static/image/picrew/cheek/4.png",
-            "/static/image/picrew/cheek/5.png",
-            "/static/image/picrew/mouse/1.png",
-            "/static/image/picrew/mouse/2.png",
-            "/static/image/picrew/mouse/3.png",
-            "/static/image/picrew/mouse/4.png",
-            "/static/image/picrew/mouse/5.png"
+                "/static/image/picrew/etc/nose.png",
+                "/static/image/picrew/etc/ear.png",
+                "/static/image/picrew/eyebrow/1.png",
+                "/static/image/picrew/eyebrow/2.png",
+                "/static/image/picrew/eyebrow/3.png",
+                "/static/image/picrew/eyebrow/4.png",
+                "/static/image/picrew/eyebrow/5.png",
+                "/static/image/picrew/cheek/1.png",
+                "/static/image/picrew/cheek/2.png",
+                "/static/image/picrew/cheek/3.png",
+                "/static/image/picrew/cheek/4.png",
+                "/static/image/picrew/cheek/5.png",
+                "/static/image/picrew/mouse/1.png",
+                "/static/image/picrew/mouse/2.png",
+                "/static/image/picrew/mouse/3.png",
+                "/static/image/picrew/mouse/4.png",
+                "/static/image/picrew/mouse/5.png"
             ];
         }
 
@@ -357,6 +355,10 @@
         currentSlide = 0;
         updateCarousel();
     }
+
+    window.onload = function() {
+        updateCarouselContent('hair');
+    };
 </script>
 
 {% endblock %}
