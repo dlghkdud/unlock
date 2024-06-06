@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Friend
+from .models import Write
+from .forms import WriteForm
 
 import os
 from django.conf import settings
@@ -23,8 +25,22 @@ def home(request):
     return render(request, 'unlockk/home.html')
 
 def write(request):
-    return render(request, 'unlockk/write.html')
+    write_list = Write.objects.order_by('-create_date')
+    context = {'write_list' : write_list}
+    return render(request, 'unlockk/write.html', context)
 
+def write_create(request):
+    if request.method == 'POST':
+        form = WriteForm(request.POST)
+        if form.is_valid():
+            write = form.save(commit=False)
+            write.create_date = timezone.now()
+            write.save()
+            return redirect('unlockk:home')
+    else:
+        form = WriteForm()
+    context = {'form':form}
+    return render(request, 'unlockk/write_form.html', context)
 
 # 친구신청
 @login_required

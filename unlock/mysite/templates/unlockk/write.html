@@ -6,34 +6,74 @@
         margin: 0;
         padding: 0;
         height: 100vh;
+        width: 99.9%;
+        font-family: Arial, sans-serif;
     }
     .write_body{
-        width: 98%;
-        height: 87%;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        padding: 2vh;
-        padding-top: 3vh;
+        padding-top: 4vh;
+        align-items: flex-start;    
+        padding-left: 0.4%;
     }
     .write_add{
         display: flex;
         border: solid 4px black;
         width: 24vh;
         height: 24vh;
+        margin-left: 1.5vh;
         border-radius: 10%;
         align-items: center;
         justify-content: center;
     }
     .write_img{
+        display: flex;
         width: 40%;
+    }
+    .write_box{
+        display: flex;
+        border: solid 4px black;
+        border-radius: 20px;
+        width: 180px;
+        height: 180px;
+        flex-direction: column;
+        margin: 1.5vh;
+        margin-top: 0;
+        margin-right: 0;
+        padding: 2vh;
+        overflow: auto;
+    }
+    .write_inner{
+        display: flex; 
+        justify-content: space-between;
+        margin-bottom: 1vh;
+    }
+    .writer{
+        display: flex;
+    }
+    .date{
+        display: flex;
     }
 </style>
 
 <span class="write_body">
     <div class="write_add">
-        <img src="/static/image/write_add.png" class="write_img">
+        <a href="{ %url 'unlockk:write_create' %}"><img src="/static/image/write_add.png" class="write_img"></a>
     </div>    
+
+    {% if write_list %}
+            {% for write in write_list %}
+                <div class="write_box">
+                    <div class="write_inner">
+                        <span class="writer">{{ write.author }}</span>
+                        <span class="date">{{ write.create_date | date:"Y.m.d"}}</span>
+                    </div>
+                    <span class="content">{{ write.content }}</span>
+                    
+                </div>
+            {% endfor %}
+        {% endif %}
 </span>
 
 
