@@ -6,12 +6,14 @@ class Write(models.Model) :
     content = models.TextField()
     create_date = models.DateTimeField()
 
-class Friend(models.Model) :
-    from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_friend_requests')
-    to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_friend_requests')
-    created_at = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=20, choices=[('pending', '신청중'), ('accepted', '수락됨'), ('rejected', '거절됨')], default='신청중')
-
+class Friend(models.Model):
+    from_user = models.ForeignKey(User, related_name='from_user', on_delete=models.CASCADE)
+    to_user = models.ForeignKey(User, related_name='to_user', on_delete=models.CASCADE)
+    status = models.CharField(max_length=10, default='pending')  # 'pending', 'accepted', 'rejected'
+    
+    def __str__(self):
+        return f"{self.from_user} to {self.to_user} - {self.status}"
+    
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     friends = models.ManyToManyField('self', symmetrical=True, blank=True)

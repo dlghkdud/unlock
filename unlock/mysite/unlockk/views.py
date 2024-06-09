@@ -43,7 +43,7 @@ def friend_request(request, user_id):
             messages.success(request, "친구 신청을 보냈습니다.")
         return redirect('unlockk:home')
     else:
-        return render(request, 'unlockk/follow.html', {'users': users})
+        return render(request, 'unlockk/base.html', {'users': users})
  
 # 친구신청 수락
 @login_required
@@ -72,3 +72,14 @@ def friend_reject(request, friend_request_id):
         friend_request.save()
         messages.success(request, "친구 신청을 거절했습니다.")
     return redirect('unlockk:home')
+
+# 친구 목록
+@login_required
+def friend_list(request):
+    user = request.user
+    # 친구 관계에서 status가 'accepted'인 경우만 필터링
+    friends = Friend.objects.filter(
+        (Q(from_user=user) | Q(to_user=user)) & Q(status='accepted')
+    ).distinct()
+    
+    return render(request, 'unlockk/home.html', {'friends': friends})

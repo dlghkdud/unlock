@@ -50,33 +50,6 @@
             align-items: center;
             cursor: pointer;
         }
-        .popup {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
-        .popup-content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 80%;
-            max-height: 80%;
-            overflow-y: auto;
-        }
-        .follow-button {
-            background-color: #007bff;
-            color: white;
-            padding: 5px 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
         .group-images {
             width: 270px; 
             height: 300px; 
@@ -133,16 +106,11 @@
 <body>
     <div class="body2">
     <div class="area" id="area-container">
-            <img src="/static/image/group/Group 80.png" alt="Add" onclick="openPopup()" class="group-images">
+            <img src="/static/image/group/Group 80.png" alt="Add" class="group-images">
     </div>
     <div class="group-image-container" id="image-container"></div>
 
-    <!-- 팔로우 목록 팝업 -->
-    <div class="popup" id="popup-container">
-        <div class="popup-content">
-            <h2>팔로우 목록</h2>
-        </div>
-    </div>
+
     <div class="sidebar">
         <div class="follow-list">follow</div>
         <div class="user-list">
@@ -153,55 +121,7 @@
                     <p>이메일 주소</p>
                 </div>
             </div>
-            <div class="user-profile">
-                <img src="프로필_사진_링크" alt="프로필 사진">
-                <div class="user-info">
-                    <p>유저 이름</p>
-                    <p>이메일 주소</p>
-                </div>
-            </div>
-            <div class="user-profile">
-                <img src="프로필_사진_링크" alt="프로필 사진">
-                <div class="user-info">
-                    <p>유저 이름</p>
-                    <p>이메일 주소</p>
-                </div>
-            </div>
-            <div class="user-profile">
-                <img src="프로필_사진_링크" alt="프로필 사진">
-                <div class="user-info">
-                    <p>유저 이름</p>
-                    <p>이메일 주소</p>
-                </div>
-            </div>
-            <div class="user-profile">
-                <img src="프로필_사진_링크" alt="프로필 사진">
-                <div class="user-info">
-                    <p>유저 이름</p>
-                    <p>이메일 주소</p>
-                </div>
-            </div>
-            <div class="user-profile">
-                <img src="프로필_사진_링크" alt="프로필 사진">
-                <div class="user-info">
-                    <p>유저 이름</p>
-                    <p>이메일 주소</p>
-                </div>
-            </div>
-            <div class="user-profile">
-                <img src="프로필_사진_링크" alt="프로필 사진">
-                <div class="user-info">
-                    <p>유저 이름</p>
-                    <p>이메일 주소</p>
-                </div>
-            </div>
-            <div class="user-profile">
-                <img src="프로필_사진_링크" alt="프로필 사진">
-                <div class="user-info">
-                    <p>유저 이름</p>
-                    <p>이메일 주소</p>
-                </div>
-            </div>
+            <!-- 다른 사용자 프로필 정보들 -->
         </div>
     </div>
     </div>
@@ -232,10 +152,6 @@
                         // 팔로우한 사용자를 팝업창에서 제거
                         var userElement = document.getElementById(`user-${userId}`);
                         userElement.parentNode.removeChild(userElement);
-
-                        // 팝업창 닫기
-                        var popup = document.getElementById("popup-container");
-                        popup.style.display = "none";
                     }
                 })
                 .catch(error => console.error('Error:', error));
@@ -263,19 +179,6 @@
             // 이미지 컨테이너에 이미지 추가
             imageContainer.appendChild(imageElement);
         });
-        // 팝업 열기
-        function openPopup() {
-            var popup = document.getElementById("popup-container");
-            popup.style.display = "flex";
-        }
-    
-        // 팝업 외부 클릭 시 팝업 닫기
-        window.onclick = function(event) {
-            var popup = document.getElementById("popup-container");
-            if (event.target == popup) {
-                popup.style.display = "none";
-            }
-        }
         </script>
     
 {% endblock %}
