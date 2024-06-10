@@ -55,7 +55,7 @@
     .date{
         display: flex;
     }
-    .popup {
+    .popup2 {
             position: fixed;
             top: 0;
             left: 0;
@@ -66,7 +66,7 @@
             justify-content: center;
             align-items: center;
         }
-        .popup-content {
+        .popup-content2 {
             display: flex;
             background-color: black;
             border: solid 4px white;
@@ -80,7 +80,7 @@
             flex-direction: column;
             align-items: flex-end;
         }
-        .writebt{
+        .writebt2{
             display: flex;
             width: 6%;
             height: 9%;
@@ -89,13 +89,13 @@
 
 <span class="write_body">
     <div class="write_add">
-        <img src="/static/image/write_add.png" onclick="openPopup()" class="write_img">
+        <img src="/static/image/write_add.png" onclick="openPopup2()" class="write_img">
     </div>    
 
-    <div class="popup" id="popup-container">
-        <div class="popup-content">
+    <div class="popup2" id="popup-container2">
+        <div class="popup-content2">
             <div></div>
-            <img src="/static/image/write.png" class="writebt">
+            <img src="/static/image/write.png" class="writebt2">
         </div>
     </div>
 
@@ -115,14 +115,14 @@
 
 <script>
     // 팝업 열기
-    function openPopup() {
-            var popup = document.getElementById("popup-container");
+    function openPopup2() {
+            var popup = document.getElementById("popup-container2");
             popup.style.display = "flex";
         }
     
         // 팝업 외부 클릭 시 팝업 닫기
         window.onclick = function(event) {
-            var popup = document.getElementById("popup-container");
+            var popup = document.getElementById("popup-container2");
             if (event.target == popup) {
                 popup.style.display = "none";
             }
