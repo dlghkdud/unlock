@@ -143,7 +143,7 @@
         <div id="popup-content">
             <span id="popup-close" onclick="closePopup()">x</span>
             <h2>친구 신청</h2>
-            <form method="post" action="{% url 'unlockk:friend-request' user.id %}">
+            <!-- 오류나서 삭제해둠 -->
                 <div id="friend-list">
                     <ul>
                         {% for user in users %}
