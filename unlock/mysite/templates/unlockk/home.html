@@ -16,9 +16,9 @@
         .body2{
             display: flex;
             justify-content: flex-start;
-            margin-top: 5vh;
-            margin-right: 3vh;
-            margin-left: 3vh;
+            margin-top: 2.5%;
+            margin-left: 3%;
+            margin-right: 3%;
         }
         .sidebar {
             display: flex;
@@ -27,10 +27,13 @@
         }
         .area {
             display: flex;
+            justify-content: space-between;
+            width: 30%;
         }
         .group, .user {
-            width: 50%;
+            width: 30%;
             border: 1px solid #ccc;
+            padding: 10px;
         }
         .list {
             border: 1px solid #ccc;
@@ -48,9 +51,9 @@
             cursor: pointer;
         }
         .group-images {
-            width: auto; height: auto;
-            max-width: 38vh;
-            max-height: 38vh;
+            width: 270px; 
+            height: 300px; 
+            padding: 10px;
             cursor: pointer;
         }
         .group-image-container {
@@ -102,10 +105,10 @@
 </head>
 <body>
     <div class="body2">
-    <div class="group-image-container" id="image-container"></div>
     <div class="area" id="area-container">
         <img src="/static/image/group/Group 80.png" alt="Add" class="group-images">
     </div>
+    <div class="group-image-container" id="image-container"></div>
 
     <div class="sidebar">
         <div class="follow-list">follow</div>
@@ -123,6 +126,7 @@
             </div>
             <!-- 다른 사용자 프로필 정보들 -->
         </div>
+    </div>
     </div>
 
     <script>
