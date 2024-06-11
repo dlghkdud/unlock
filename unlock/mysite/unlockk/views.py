@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.views.generic.detail import DetailView
 from django.contrib import messages
 from .models import Friend
 from .models import Write
@@ -83,3 +84,9 @@ def friend_list(request):
     ).distinct()
     
     return render(request, 'unlockk/home.html', {'friends': friends})
+
+def home(request):
+    profile_photo = None
+    if hasattr(request.user, 'profile'):
+        profile_photo = request.user.profile.profile_photo
+    return render(request, 'unlockk/home.html', {'profile_photo': profile_photo})
