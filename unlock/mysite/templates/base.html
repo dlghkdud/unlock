@@ -143,17 +143,23 @@
         <div id="popup-content">
             <span id="popup-close" onclick="closePopup()">x</span>
             <h2>친구 신청</h2>
-            <!-- 오류나서 삭제해둠 -->
-                <div id="friend-list">
-                    <ul>
-                        {% for user in users %}
-                        <li>
-                            {{ user.username }}
+            <div id="user-list">
+                <form method="GET" action="{% url 'unlockk:friend_list' %}">
+                    <input type="text" name="search" placeholder="사용자 검색">
+                    <button type="submit">검색</button>
+                </form>
+                <ul>
+                    {% for user in users %}
+                    <li>
+                        {{ user.username }}
+                        <form method="POST" action="{% url 'unlockk:friend_request' user.id %}">
+                            {% csrf_token %}
                             <button type="submit" name="to_user" value="{{ user.id }}">친구 신청</button>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
+                        </form>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
             </form>
         </div>
     </div>

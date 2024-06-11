@@ -74,6 +74,18 @@ def friend_reject(request, friend_request_id):
         messages.success(request, "친구 신청을 거절했습니다.")
     return redirect('unlockk:home')
 
+
+# 친구 삭제
+@login_required
+def friend_remove(request, friend_id):
+    friend_relation = get_object_or_404(Friend, id=friend_id)
+    if friend_relation.from_user == request.user or friend_relation.to_user == request.user:
+        friend_relation.delete()
+        messages.success(request, "친구를 삭제했습니다.")
+    else:
+        messages.error(request, "권한이 없습니다.")
+    return redirect('unlockk:home')
+
 # 친구 목록
 @login_required
 def friend_list(request):
