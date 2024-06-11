@@ -100,6 +100,86 @@
             border: black 4px solid;
             margin-bottom: -2vh;
         }
+        .profile-photo {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px; 
+            margin-right: 10px;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .popup-header h2 {
+            margin: 0;
+            font-size: 1.5em;
+            text-align: center;
+        }
+        .close-btn {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .popup-content {
+            margin-top: 20px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+        }
+        .popup-list {
+            padding: 10px;
+            border: 1px solid #ffffff;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        .popup-profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px; 
+            margin-bottom: 10px;
+        }
+        .popup-info {
+            flex-grow: 1;
+        }
+        .popup-profile img {
+            width: 67px;
+            height: 67px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .popup-s{
+            background-color: black;
+            width:1000px ;
+            height: 50px;
+            border-radius: 10px;
+        }
+
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.0.7/css/boxicons.min.css">
 </head>
@@ -128,6 +208,29 @@
         </div>
     </div>
     </div>
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <div class="popup-header">
+            <div class="popup-s"></div>
+            <span class="close-btn" id="close-btn">&times;</span> 
+        </div>
+        <div class="popup-list">
+            <div class="popup-profile">
+                <img src="https://w7.pngwing.com/pngs/137/52/png-transparent-computer-icons-nct-circle-icon-rim-emoticon-individual.png" alt="프로필 사진">
+                <div class="popup-info">
+                    <p>친구 이름</p>
+                    <p>이메일 주소</p>
+                </div>
+            </div>
+            <div class="popup-profile">
+                <img src="https://w7.pngwing.com/pngs/137/52/png-transparent-computer-icons-nct-circle-icon-rim-emoticon-individual.png" alt="프로필 사진">
+                <div class="popup-info">
+                    <p>친구 이름</p>
+                    <p>이메일 주소</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         // 사용자 팔로우
@@ -136,8 +239,9 @@
                 .then(response => {
                     if (response.ok) {
                         // 팔로우한 사용자 정보 가져오기
-                        var username = document.querySelector(`#user-${userId}`).textContent;
-                        var email = document.querySelector(`#user-${userId} p.email`).textContent;
+                        var username = document.querySelector(`#user-${userId} .user-info p:first-child`).textContent;
+                        var email = document.querySelector(`#user-${userId} .user-info p:last-child`).textContent;
+
 
                         // 박스 추가
                         var newUser = document.createElement("div");
@@ -156,6 +260,10 @@
                         // 팔로우한 사용자를 팝업창에서 제거
                         var userElement = document.getElementById(`user-${userId}`);
                         userElement.parentNode.removeChild(userElement);
+
+                        // 팝업창 닫기
+                        var popup = document.getElementById("popup-container");
+                        popup.style.display = "none";
                     }
                 })
                 .catch(error => console.error('Error:', error));
@@ -183,7 +291,38 @@
             // 이미지 컨테이너에 이미지 추가
             imageContainer.appendChild(imageElement);
         });
-        </script>
+
+        // 팝업 표시 함수
+        function showPopup() {
+            document.getElementById("popup").style.display = 'block';
+            document.getElementById("overlay").style.display = 'block';
+        }
+
+        // 팝업 닫기 함수
+        function closePopup() {
+            document.getElementById("popup").style.display = 'none';
+            document.getElementById("overlay").style.display = 'none';
+        }
+
+        // 이미지 클릭 시 팝업 표시
+        document.querySelector('.group-images').addEventListener('click', showPopup);
+
+        // 닫기 버튼 클릭 시 팝업 닫기
+        document.getElementById("close-btn").addEventListener("click", closePopup);
+
+        // 오버레이 클릭 시 팝업 닫기
+        document.getElementById("overlay").addEventListener("click", closePopup);
+
+        // 외부 클릭 시 팝업 닫기
+        window.onclick = function(event) {
+            var popup = document.getElementById("popup");
+            if (event.target == popup) {
+                popup.style.display = "none";
+                document.getElementById("overlay").style.display = 'none';
+            }
+        }
+
+    </script>
     
 {% endblock %}
 </body>
