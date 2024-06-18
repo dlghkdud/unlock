@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.views.generic.detail import DetailView
 from django.contrib import messages
 from .models import Friend
-from .models import Write
+from .models import Write 
 # from .forms import WriteForm
 
 import os
@@ -25,9 +25,9 @@ def picrew(request):
 def home(request):
     return render(request, 'unlockk/home.html')
 
-def write(request):
-    write_list = Write.objects.order_by('-create_date')
-    context = {'write_list' : write_list}
+def write_page(request, object_id):
+    write_object = get_object_or_404(Write, id=object_id)
+    context = {'write_object': write_object}
     return render(request, 'unlockk/write.html', context)
 
 # 친구신청

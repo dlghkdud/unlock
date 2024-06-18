@@ -13,7 +13,7 @@
             height: 100vh;
             font-family: Arial, sans-serif;
         }
-        .body2{
+        .body2 {
             display: flex;
             justify-content: flex-start;
             margin-top: 2.5%;
@@ -60,11 +60,13 @@
             display: flex;
             flex-wrap: wrap;
             width: 70%;
+            cursor: pointer; /* 커서 추가 */
         }
         .group-image-container img {
             width: 270px;
             height: 300px; 
             margin: 10px;
+            cursor: pointer; /* 커서 추가 */
         }
         .friend-list {
             padding: 10px;
@@ -92,7 +94,7 @@
         .user-info p {
             margin: 5px 0;
         }
-        .follow-list{
+        .follow-list {
             background-color: var(--header-color);
             color: #fff;
             height: 10vh;
@@ -173,41 +175,46 @@
             border-radius: 50%;
             margin-right: 10px;
         }
-        .popup-s{
+        .popup-s {
             background-color: black;
-            width:1000px ;
+            width: 1000px;
             height: 50px;
             border-radius: 10px;
         }
-
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.0.7/css/boxicons.min.css">
 </head>
 <body>
     <div class="body2">
-    <div class="area" id="area-container">
-        <img src="/static/image/group/Group 80.png" alt="Add" class="group-images">
-    </div>
-    <div class="group-image-container" id="image-container"></div>
+        <div class="area" id="area-container">
+            <img src="/static/image/group/Group 80.png" alt="Add" class="group-images">
+        </div>
+        <div class="group-image-container" id="image-container">
+            <!-- 반복문으로 이미지와 링크 생성 -->
+            {% for write_object in write_list %}
+            <img src="{{ write_object.image_url }}" alt="Group Image {{ write_object.id }}" data-id="{{ write_object.id }}" class="group-image" onclick="redirectToWritePage('{{ write_object.id }}')">
+            {% endfor %}
+        </div>
 
-    <div class="sidebar">
-        <div class="follow-list">follow</div>
-        <div class="friend-list">
-            <div class="user-profile">
-                {% if profile_photo %}
-                    <img src="{{ profile_photo.url }}" alt="Profile Photo">
-                {% else %}
+        <div class="sidebar">
+            <div class="follow-list">follow</div>
+            <div class="friend-list">
+                <div class="user-profile">
+                    {% if profile_photo %}
+                    <img src="#" alt="Profile Photo">
+                    {% else %}
                     <p>No profile photo available.</p>
-                {% endif %}
-                <div class="user-info">
-                    <p>유저 이름</p>
-                    <p>이메일 주소</p>
+                    {% endif %}
+                    <div class="user-info">
+                        <p>유저 이름</p>
+                        <p>이메일 주소</p>
+                    </div>
                 </div>
+                <!-- 다른 사용자 프로필 정보들 -->
             </div>
-            <!-- 다른 사용자 프로필 정보들 -->
         </div>
     </div>
-    </div>
+
     <div class="overlay" id="overlay"></div>
     <div class="popup" id="popup">
         <div class="popup-header">
@@ -233,93 +240,100 @@
     </div>
 
     <script>
-        // 사용자 팔로우
-        function followUser(userId) {
-            fetch(`/unlockk/following/${userId}/`)
-                .then(response => {
-                    if (response.ok) {
-                        // 팔로우한 사용자 정보 가져오기
-                        var username = document.querySelector(`#user-${userId} .user-info p:first-child`).textContent;
-                        var email = document.querySelector(`#user-${userId} .user-info p:last-child`).textContent;
+    // 사용자 팔로우
+    function followUser(userId) {
+        fetch(`/unlockk/following/${userId}/`)
+            .then(response => {
+                if (response.ok) {
+                    // 팔로우한 사용자 정보 가져오기
+                    var username = document.querySelector(`#user-${userId} .user-info p:first-child`).textContent;
+                    var email = document.querySelector(`#user-${userId} .user-info p:last-child`).textContent;
 
 
-                        // 박스 추가
-                        var newUser = document.createElement("div");
-                        newUser.classList.add("user");
-                        newUser.innerHTML = `
-                            <div class="list">
-                                <h2>팔로우한 사용자</h2>
-                                <ul>
-                                    <li>${username}</li>
-                                    <p>Email: ${email}</p>
-                                </ul>
-                            </div>
-                        `;
-                        document.getElementById("area-container").appendChild(newUser);
-                        
-                        // 팔로우한 사용자를 팝업창에서 제거
-                        var userElement = document.getElementById(`user-${userId}`);
-                        userElement.parentNode.removeChild(userElement);
+                    // 박스 추가
+                    var newUser = document.createElement("div");
+                    newUser.classList.add("user");
+                    newUser.innerHTML = `
+                        <div class="list">
+                            <h2>팔로우한 사용자</h2>
+                            <ul>
+                                <li>${username}</li>
+                                <p>Email: ${email}</p>
+                            </ul>
+                        </div>
+                    `;
+                    document.getElementById("area-container").appendChild(newUser);
+                    
+                    // 팔로우한 사용자를 팝업창에서 제거
+                    var userElement = document.getElementById(`user-${userId}`);
+                    userElement.parentNode.removeChild(userElement);
 
-                        // 팝업창 닫기
-                        var popup = document.getElementById("popup-container");
-                        popup.style.display = "none";
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-        }
-        const images = [
-            "/static/image/group/non/Mask group-3.png",
-            "/static/image/group/non/Mask group-2.png",
-            "/static/image/group/non/Mask group-1.png",
-            "/static/image/group/non/Mask group.png"
-        ];
+                    // 팝업창 닫기
+                    var popup = document.getElementById("popup-container");
+                    popup.style.display = "none";
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+    const images = [
+        "/static/image/group/non/Mask group-3.png",
+        "/static/image/group/non/Mask group-2.png",
+        "/static/image/group/non/Mask group-1.png",
+        "/static/image/group/non/Mask group.png"
+    ];
 
-        const imageContainer = document.getElementById('image-container');
+    const imageContainer = document.getElementById('image-container');
 
-        document.querySelector('.group-images').addEventListener('click', function() {
-            // 현재 이미지의 인덱스 가져오기
-            const currentImageIndex = imageContainer.querySelectorAll('img').length;
+    document.querySelector('.group-images').addEventListener('click', function() {
+        // 현재 이미지의 인덱스 가져오기
+        const currentImageIndex = imageContainer.querySelectorAll('img').length;
 
-            // 이미지 엘리먼트 생성 및 설정
-            const imageElement = document.createElement('img');
-            const nextImageIndex = currentImageIndex % images.length;
-            imageElement.src = images[nextImageIndex];
-            imageElement.width = 270;
-            imageElement.height = 300;
+        // 이미지 엘리먼트 생성 및 설정
+        const imageElement = document.createElement('img');
+        const nextImageIndex = currentImageIndex % images.length;
+        imageElement.src = images[nextImageIndex];
+        imageElement.width = 270;
+        imageElement.height = 300;
 
-            // 이미지 컨테이너에 이미지 추가
-            imageContainer.appendChild(imageElement);
-        });
+        // 이미지 컨테이너에 이미지 추가
+        imageContainer.appendChild(imageElement);
+    });
 
-        // 팝업 표시 함수
-        function showPopup() {
-            document.getElementById("popup").style.display = 'block';
-            document.getElementById("overlay").style.display = 'block';
-        }
+    // 팝업 표시 함수
+    function showPopup() {
+        document.getElementById("popup").style.display = 'block';
+        document.getElementById("overlay").style.display = 'block';
+    }
 
-        // 팝업 닫기 함수
-        function closePopup() {
-            document.getElementById("popup").style.display = 'none';
+    // 팝업 닫기 함수
+    function closePopup() {
+        document.getElementById("popup").style.display = 'none';
+        document.getElementById("overlay").style.display = 'none';
+    }
+
+    // 이미지 클릭 시 팝업 표시
+    document.querySelector('.group-images').addEventListener('click', showPopup);
+
+    // 닫기 버튼 클릭 시 팝업 닫기
+    document.getElementById("close-btn").addEventListener("click", closePopup);
+
+    // 오버레이 클릭 시 팝업 닫기
+    document.getElementById("overlay").addEventListener("click", closePopup);
+
+    // 외부 클릭 시 팝업 닫기
+    window.onclick = function(event) {
+        var popup = document.getElementById("popup");
+        if (event.target == popup) {
+            popup.style.display = "none";
             document.getElementById("overlay").style.display = 'none';
         }
+    }
 
-        // 이미지 클릭 시 팝업 표시
-        document.querySelector('.group-images').addEventListener('click', showPopup);
-
-        // 닫기 버튼 클릭 시 팝업 닫기
-        document.getElementById("close-btn").addEventListener("click", closePopup);
-
-        // 오버레이 클릭 시 팝업 닫기
-        document.getElementById("overlay").addEventListener("click", closePopup);
-
-        // 외부 클릭 시 팝업 닫기
-        window.onclick = function(event) {
-            var popup = document.getElementById("popup");
-            if (event.target == popup) {
-                popup.style.display = "none";
-                document.getElementById("overlay").style.display = 'none';
-            }
+    // 이미지 클릭 시 페이지 이동 함수
+    function redirectToWritePage(objectId) {
+            var redirectUrl = '/write/' + objectId + '/';
+            console.log("Redirecting to:", redirectUrl);
+            window.location.href = redirectUrl;
         }
 
     </script>
